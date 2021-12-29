@@ -1,32 +1,114 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <h1>{{ title }}</h1>
+ <div class="search-box">
+   <Search placeholder="Поиск" @search="searchNotes"/>
+   </div>
+    <div><Message :message="message"/>
+    <!-- new note -->
+    <NewNote :notes="notes" @addNote="addNote"/>
     </div>
-    <router-view/>
+    <!-- note list-->
+    <Notes :notes="notesFilter" @remove="removeNote"/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Message from "./components/Message"
+import NewNote from "./components/NewNote"
+import Notes from "./components/Notes"
+import Search from "./components/Search"
+
+export default {
+components: {
+  Message,
+  NewNote,
+  Notes,
+  Search
+},
+data() {
+  return {
+    title: 'Notes App',
+    search: '',
+    message: null,
+    notes: [
+      {
+       title: '1',
+       descr: 'g',
+       date: new Date(Date.now()).toLocaleString()
+       },
+        {
+       title: '2',
+       descr: 'g',
+       date: new Date(Date.now()).toLocaleString()
+       },
+        {
+       title: '3',
+       descr: 'g',
+       date: new Date(Date.now()).toLocaleString()
+       }
+    ]
+  }
+},
+methods: {
+  addNote(note) {
+   let {title, descr} = note
+   if(title === "") {
+      this.message = true
+      return false
+   }
+   this.notes.push({
+     title: title,
+     descr: descr,
+     date: new Date(Date.now()).toLocaleString()
+   })
+   note.title = ''
+   note.descr = ''
+   this.message = null
+},
+removeNote(index) {
+  this.notes.splice(index, 1)
+},
+searchNotes(val) {
+  this.search = val 
+}
+},
+computed: {
+  notesFilter() {
+   let array = this.notes
+   let search = this.search
+   if (!search) return array
+   search = search.trim().toLowerCase()
+   array = array.filter( (item) => {
+     if (item.title.toLowerCase().indexOf(search) !== -1) {
+       return item
+   } })
+   return array
+  }
 }
 
-#nav {
-  padding: 30px;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style lang="scss">
+.search-box {
+  margin: 20px;
 }
 </style>
