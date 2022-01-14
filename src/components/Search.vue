@@ -1,36 +1,47 @@
 <template>
-    <div class="search">
-      <input type="text" v-model="value" :placeholder="placeholder">
-    </div>
+  <div class="search">
+    <BaseAppInput @input="input" :placeholder="placeholder" inputType="text" />
+  </div>
 </template>
 
 <script>
-export default {
-    props: { 
-        placeholder: {
-            type: String 
-        }
-    },
-    data() {
-      return {
-          value: ''
-        }
-    },
-    methods: {
-    
-},
-watch: {
-    value(val) {
-        this.$emit("search", val)
-    }
-}
+import BaseAppInput from "./BaseAppInput";
+import { mapActions, mapGetters } from "vuex";
 
-}
+export default {
+  name: "Search",
+  components: {
+    BaseAppInput,
+  },
+  props: {
+    placeholder: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      value: "",
+      search: "",
+    };
+  },
+  methods: {
+    ...mapActions({
+      searchPost: "posts/searchPost",
+    }),
+    input(val) {
+      this.searchPost(val);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      posts: "posts/getPosts",
+    }),
+  },
+};
 </script>
 
 <style>
-.note {
-    border: 2px red solid;
-    margin: 20px;
+.search {
+  min-width: 320px;
 }
 </style>

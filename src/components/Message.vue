@@ -1,19 +1,16 @@
 <template>
-    <div class="message" v-if="message" >
-   title не может быть пустым!
-    </div>
+  <article class="message" v-if="message">title не может быть пустым!</article>
 </template>
 
 <script>
 export default {
- props: {
+  props: {
     message: {
-        type: String,
-        required: true
-    } 
- }
-}
-
+      type: Boolean,
+      required: true,
+    },
+  },
+};
 </script>
 
 

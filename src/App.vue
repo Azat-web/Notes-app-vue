@@ -1,114 +1,47 @@
 <template>
-  <div id="app">
-    <h1>{{ title }}</h1>
- <div class="search-box">
-   <Search placeholder="Поиск" @search="searchNotes"/>
-   </div>
-    <div><Message :message="message"/>
-    <!-- new note -->
-    <NewNote :notes="notes" @addNote="addNote"/>
-    </div>
-    <!-- note list-->
-    <Notes :notes="notesFilter" @remove="removeNote"/>
+  <div class="wrapper" id="app">
+    <notifications group="auth" position="center top"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Message from "./components/Message"
-import NewNote from "./components/NewNote"
-import Notes from "./components/Notes"
-import Search from "./components/Search"
 
 export default {
-components: {
-  Message,
-  NewNote,
-  Notes,
-  Search
-},
-data() {
-  return {
-    title: 'Notes App',
-    search: '',
-    message: null,
-    notes: [
-      {
-       title: '1',
-       descr: 'g',
-       date: new Date(Date.now()).toLocaleString()
-       },
-        {
-       title: '2',
-       descr: 'g',
-       date: new Date(Date.now()).toLocaleString()
-       },
-        {
-       title: '3',
-       descr: 'g',
-       date: new Date(Date.now()).toLocaleString()
-       }
-    ]
+  components: {
+  },
+  data() {
+    return {
+    };
+  },
+  methods: {
+  },
+  computed: {},
+  async mounted() {
   }
-},
-methods: {
-  addNote(note) {
-   let {title, descr} = note
-   if(title === "") {
-      this.message = true
-      return false
-   }
-   this.notes.push({
-     title: title,
-     descr: descr,
-     date: new Date(Date.now()).toLocaleString()
-   })
-   note.title = ''
-   note.descr = ''
-   this.message = null
-},
-removeNote(index) {
-  this.notes.splice(index, 1)
-},
-searchNotes(val) {
-  this.search = val 
-}
-},
-computed: {
-  notesFilter() {
-   let array = this.notes
-   let search = this.search
-   if (!search) return array
-   search = search.trim().toLowerCase()
-   array = array.filter( (item) => {
-     if (item.title.toLowerCase().indexOf(search) !== -1) {
-       return item
-   } })
-   return array
-  }
-}
-
-}
-
-
-
-
+};
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style lang="scss">
-.search-box {
-  margin: 20px;
-}
+@import "./theme/variables";
+@import "./theme/theme";
+
+
+body,html {
+    margin: 0;
+    padding: 0;
+    background-color: $base-app-background-gray;
+  }
+
+  #app {
+    display: block;
+    font-family: 'Merriweather', serif;
+    margin: 0;
+    padding: 0 0 64px 0;
+    box-sizing: border-box;
+    min-height: calc(100 * var(--vh));
+    color: $base-text-white;
+    width: 100%;
+  }
+
 </style>
