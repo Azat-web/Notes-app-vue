@@ -9,7 +9,10 @@
         <p>{{ note.body }}</p>
       </article>
       <div class="note-remove">
-        <BaseAppButton @click="deleteNote(note.id)" title="Удалить пост" />
+        <BaseAppButton 
+        @click="deleteNote(note.id)" 
+        :title="$t('main.delete')" 
+        />
       </div>
     </section>
   </section>

@@ -1,4 +1,8 @@
 <template>
+<div class="container">
+  <div class="local-switcher">
+   <LocalSwitcher/>
+   </div>
   <section class="page centre">
     <section class="base">
       <BaseAppImage
@@ -6,8 +10,8 @@
       />
       <section class="base-content">
         <article class="base-auth-text-container mt-20 mb-20">
-          <span class="base-auth-text md-size mb-5">The notes app</span>
-          <span class="base-auth-text sm-size">Write notes every day</span>
+          <span class="base-auth-text md-size mb-5">{{$t('auth.the_notes_app')}}</span>
+          <span class="base-auth-text sm-size">{{$t('auth.write_notes_every_day')}}</span>
         </article>
         <form @submit.prevent="onSubmit" class="base-auth-form">
           <BaseAppInput
@@ -16,7 +20,7 @@
             v-model="form.email"
             input-type="email"
             input-name="email"
-            placeholder="Email"
+            :placeholder="$t('auth.email')"
           />
           <BaseAppInput
             :invalid="invalidForm"
@@ -24,19 +28,19 @@
             v-model="form.password"
             input-type="password"
             input-name="password"
-            placeholder="Password"
+            :placeholder="$t('auth.password')"
           />
           <BaseAppButton
             :isLoading="isLoading"
             :disabled="isLoading"
             type="submit"
-            title="sign in"
+            :title="$t('auth.sign_in')"
           />
         </form>
         <article class="base-auth-text-container mt-20 mb-20">
           <div class="register-link">
-            <span class="base-auth-text font-open-sans sm-size mr-5">Click on the link to get your login details - </span>
-            <span class="base-link font-open-sans sm-size mr-5" @click="getLogin">Receive</span>
+            <span class="base-auth-text font-open-sans sm-size mr-5">{{ $t('auth.click_on_the_link_to_get_your_login_details') }} -</span>
+            <span class="base-link font-open-sans sm-size mr-5" @click="getLogin">{{ $t('auth.receive') }}</span>
           </div>
           <span class="base-auth-text">
         </span>
@@ -44,6 +48,7 @@
       </section>
     </section>
   </section>
+  </div>
 </template>
 
 <script>
@@ -53,11 +58,12 @@ import BaseAppInput from '../../components/BaseAppInput'
 import BaseAppImage from '../../components/BaseAppImage'
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
+import LocalSwitcher from '../../components/LocalSwitcher'
 
 export default {
   name: 'Login',
   mixins: [validationMixin],
-  components: { BaseAppInput, BaseAppButton, BaseAppImage },
+  components: { BaseAppInput, BaseAppButton, BaseAppImage, LocalSwitcher },
   data () {
     return {
       submitError: null,
@@ -115,4 +121,11 @@ export default {
 <style lang="scss" scoped>
 @import "../../theme/theme";
 @import "./auth";
+
+  .local-switcher {
+    display: flex;
+    justify-content: right;
+    margin: 10px 20px 0 0;
+  }
+
 </style>

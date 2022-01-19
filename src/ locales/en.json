@@ -1,0 +1,20 @@
+{
+  "auth": {
+    "the_notes_app": "The Notes App",
+    "write_notes_every_day": "Write notes every day",
+    "password": "Password",
+    "email": "Email",
+    "sign_in": "Sign in",
+    "click_on_the_link_to_get_your_login_details": "Click on the link to get your login details",
+    "receive": "Receive"
+  },
+  "main": {
+      "language": "Language",
+      "add_note": "Add note",
+      "add": "Add",
+      "delete": "Delete",
+      "search_by_name": "Search by name",
+      "name": "Name",
+      "description": "Description"
+  }
+}

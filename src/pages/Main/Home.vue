@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="lang-switch">
+        <LocalSwitcher/>
+    </div>
     <div class="header">
    <div class="header-image">
      <BaseAppImage
@@ -12,11 +15,11 @@
     </div>
     <div class="header-line"></div>
     <div class="search-box">
-      <Search placeholder="Поиск по названию"/>
+      <Search :placeholder="$t('main.search_by_name')"/>
     </div>
     <div class="create-note">
       <!-- new note -->
-      <h2 class="create-note-title">Добавить заметку</h2>
+      <h2 class="create-note-title">{{ $t('main.add_note') }}</h2>
       <div class="create-note-line"></div>
       <NewNote/>
     </div>
@@ -30,14 +33,17 @@ import NewNote from "../../components/NewNote.vue";
 import Notes from "../../components/Notes";
 import Search from "../../components/Search";
 import BaseAppImage from '../../components/BaseAppImage'
+import LocalSwitcher from '../../components/LocalSwitcher'
 import { mapActions } from "vuex";
+
 
 export default {
   components: {
     NewNote,
     Notes,
     Search,
-    BaseAppImage
+    BaseAppImage,
+    LocalSwitcher
   },
   data() {
     return {
@@ -60,6 +66,12 @@ export default {
 
 <style lang="scss">
 @import '../../theme/variables';
+
+.lang-switch {
+  display: flex;
+  justify-content: right;
+  margin: 10px 20px 0 0;
+}
 
 .header {
   display: flex;

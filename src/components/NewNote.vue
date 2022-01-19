@@ -4,7 +4,7 @@
       <BaseAppInput
         :invalid="invalidForm"
         @input="input"
-        placeholder="Название"
+        :placeholder="$t('main.name')"
         inputType="text"
       />
       <p 
@@ -14,10 +14,10 @@
       </p>
       <BaseTextArea 
       @input="onInput"
-      placeholder="Описание"
+      :placeholder="$t('main.description')"
       />
       <BaseAppButton 
-      title="Добавить" 
+      :title="$t('main.add')" 
       type="submit"
       />
     </form>
