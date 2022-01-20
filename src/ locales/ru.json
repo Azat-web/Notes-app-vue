@@ -15,6 +15,12 @@
     "delete": "Удалить",
     "search_by_name": "Поиск по названию",
     "name": "Название",
-    "description": "Описание"
+    "description": "Описание",
+    "this_is_a_required_field": "Это обязательное поле!",
+    "successfully": "Успешно",
+    "error": "Ошибка",
+    "note_added": "Заметка добавлена",
+    "note_deleted": "Заметка удалена",
+    "email_or_password_invalid": "Пароль или электронная почта неверны"
   }
 }

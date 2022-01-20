@@ -13,7 +13,7 @@ export default {
   name: 'BaseAppImage',
   props: {
     width: {
-      type: String
+      type: Object
     }
   }
 }

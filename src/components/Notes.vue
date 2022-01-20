@@ -60,6 +60,12 @@ export default {
         }
       });
       this.changePosts(newNotes);
+      this.$notify({
+          group: 'app',
+          type: 'success',
+          title: this.$t('main.successfully'),
+          text: this.$t('main.note_deleted')
+        })
     },
   },
 };

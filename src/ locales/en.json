@@ -15,6 +15,12 @@
       "delete": "Delete",
       "search_by_name": "Search by name",
       "name": "Name",
-      "description": "Description"
+      "description": "Description",
+      "this_is_a_required_field": "This is a required field!",
+      "successfully": "Successfully",
+      "error": "Error",
+      "note_added": "Note added",
+      "note_deleted": "Note deleted",
+      "email_or_password_invalid": "Email or password invalid"
   }
 }

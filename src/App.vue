@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper" id="app">
     <notifications group="auth" position="center top"/>
+    <notifications group="app" position="center top"/>
     <router-view></router-view>
   </div>
 </template>

@@ -2,22 +2,26 @@
   <div class="locale-switcher">
     <div class="select" @mouseleave="handlerVisibleOptions">
       <div class="select-header" @mouseenter="handlerVisibleOptions">
-        <div class="select-title">{{ $t('main.language') }}</div>
+        <div class="select-title">{{ $t("main.language") }}</div>
         <img
           class="select-img"
           src="../assets/images/Russia.png"
           alt="Russia"
-          v-if="selectedlocale === 2"
+          v-if="selectedLocale === 2"
         />
         <img
           class="select-img"
           src="../assets/images/USA.png"
           alt="USA"
-          v-else
+          v-if="selectedLocale === 1"
         />
       </div>
       <div class="options" v-if="isVisibleOptions">
-        <p v-for="locale in locales" :key="locale" @click="switchLang(locale)">
+        <p
+          v-for="locale in locales"
+          :key="locale.value"
+          @click="switchLang(locale)"
+        >
           {{ locale.name }}
         </p>
       </div>
@@ -26,36 +30,45 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  name: 'LocalSwitcher',
+  name: "LocalSwitcher",
   components: {},
   data() {
     return {
       isVisibleOptions: false,
-      selectedlocale: 1,
       locales: [
-        { name: 'English', lang: 'en', value: 1 },
-        { name: 'Русский', lang: 'ru', value: 2 }
-      ]
-    }
+        { name: "English", lang: "en", value: 1 },
+        { name: "Русский", lang: "ru", value: 2 },
+      ],
+    };
+  },
+  computed: {
+    ...mapGetters({
+      selectedLocale: "posts/getLocales",
+    }),
   },
   methods: {
+    ...mapActions({
+      changeSelectLocale: "posts/changeSelectLocale",
+    }),
     handlerVisibleOptions() {
-      this.isVisibleOptions = !this.isVisibleOptions
+      this.isVisibleOptions = !this.isVisibleOptions;
     },
     switchLang(locale) {
       if (this.$i18n.locale !== locale.lang) {
-        this.$i18n.locale = locale.lang
+        this.$i18n.locale = locale.lang;
       }
-      this.isVisibleOptions = false
-      this.selectedlocale = locale.value
-    }
-  }
-}
+      this.isVisibleOptions = false;
+      this.changeSelectLocale(locale.value);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-@import '../theme/variables';
+@import "../theme/variables";
 
 .select {
   width: 200px;

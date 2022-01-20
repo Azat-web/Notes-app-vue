@@ -10,7 +10,7 @@
       <p 
       v-if="$v.form.note.title.$dirty && !$v.form.note.title.required" 
       class="invalid-feedback"
-      >Это обязательное поле!
+      >{{ $t('main.this_is_a_required_field') }}
       </p>
       <BaseTextArea 
       @input="onInput"
@@ -100,13 +100,24 @@ export default {
       this.form.note.body = "";
       event.target.reset()
       this.$v.$reset()
+      this.$notify({
+          group: 'app',
+          type: 'success',
+          title: this.$t('main.successfully'),
+          text: this.$t('main.note_added')
+        })
     },
   },
 };
 </script>
 
 
-<style lang="sass">
+<style lang="scss">
+
+.invalid-feedback {
+  color: red;
+  font-size: 11px;
+}
 
 </style>
 
