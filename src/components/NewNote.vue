@@ -103,8 +103,7 @@ export default {
       this.$notify({
           group: 'app',
           type: 'success',
-          title: this.$t('main.successfully'),
-          text: this.$t('main.note_added')
+          title: this.$t('main.note_added')
         })
     },
   },
