@@ -4,6 +4,7 @@ const getDefaultState = () => ({
   posts: [],
   searchPost: "",
   selectLocale: 1,
+  isAuth: false
 });
 
 const postsList = {

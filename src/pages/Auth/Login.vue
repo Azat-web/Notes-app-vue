@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: "profile/login",
+      isAuth: "auth/changeIsAuth"
     }),
     getLogin() {
       this.form.email = "front@mail.com";
@@ -105,6 +105,7 @@ export default {
         this.form.email === "front@mail.com" &&
         this.form.password === "admin"
       ) {
+        this.isAuth(true)
         this.$router.push("/");
       } else {
         this.submitError = true;
