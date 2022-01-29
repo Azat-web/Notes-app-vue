@@ -1,20 +1,22 @@
 <template>
   <section class="notes">
+    <transition-group name="note-animation" tag="div">
     <section class="note" v-for="note in notesFilter" :key="note.id">
-      <article class="note-header">
-        <h3 class="note-header-title">{{ note.title }}</h3>
-      </article>
-      <div class="note-header-line"></div>
-      <article class="note-header-body">
-        <p>{{ note.body }}</p>
-      </article>
-      <div class="note-remove">
-        <BaseAppButton 
-        @click="deleteNote(note.id)" 
-        :title="$t('main.delete')" 
-        />
-      </div>
+          <article class="note-header">
+            <h3 class="note-header-title">{{ note.title }}</h3>
+          </article>
+          <div class="note-header-line"></div>
+          <article class="note-header-body">
+            <p>{{ note.body }}</p>
+          </article>
+          <div class="note-remove">
+            <BaseAppButton
+              @click="deleteNote(note.id)"
+              :title="$t('main.delete')"
+            />
+          </div>
     </section>
+    </transition-group>
   </section>
 </template>
 
@@ -28,7 +30,8 @@ export default {
     BaseAppButton,
   },
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     ...mapGetters({
@@ -61,17 +64,17 @@ export default {
       });
       this.changePosts(newNotes);
       this.$notify({
-          group: 'app',
-          type: 'success',
-          title: this.$t('main.note_deleted')
-        })
+        group: "app",
+        type: "success",
+        title: this.$t("main.note_deleted"),
+      });
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import '../theme/variables';
+@import "../theme/variables";
 
 .note {
   border: 2px solid $base-input-color;
@@ -90,7 +93,20 @@ export default {
   text-transform: uppercase;
 }
 
-.note-header-title {
+/* Animations */
+.note-animation-enter-active {
+  transition: all .2s ease;
 }
 
+.note-animation-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.note-animation-enter,
+.note-animation-leave-to {
+ transform: translateX(230px);
+ opacity: 0;
+}
+
+/**/
 </style>
